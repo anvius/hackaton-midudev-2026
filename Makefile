@@ -25,14 +25,14 @@ lint:
 	cd src/frontend && bun run lint
 
 start-infra:
-	docker compose -f infra/docker-compose.yml up -d --build --remove-orphans
+	docker compose -f infra/compose.yaml up -d --build --remove-orphans
 
 up-infra: start-infra
 	@echo "Frontend: http://localhost:$${FRONTEND_PORT:-4174}"
 	@echo "Backend health: http://localhost:$${BACKEND_PORT:-3001}/health"
 
 stop-infra:
-	docker compose -f infra/docker-compose.yml down --remove-orphans
+	docker compose -f infra/compose.yaml down --remove-orphans
 
 test-docker: start-infra
 	@timeout=90; \
@@ -62,12 +62,12 @@ validate-architecture:
 	@test -d src/backend/certification/application
 	@test -d src/backend/certification/infrastructure
 	@test -d src/frontend/src/routes
-	@test -d infra/docker
+	@test -d infra/containers
 	@test -d etc
 	@test -d var/log
 	@echo "Architecture validation passed"
 
 deploy:
 	@echo "Deploy simulation for Hackathon MVP"
-	docker compose -f infra/docker-compose.yml up -d --build
+	docker compose -f infra/compose.yaml up -d --build
 	@echo "Deployment complete (simulated)"

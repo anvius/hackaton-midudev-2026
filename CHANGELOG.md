@@ -22,7 +22,7 @@ First public release. Submitted to [CubePath 2026 Hackathon](https://github.com/
 - **Legal pages**: Terms of Use, Privacy Policy, Legal Notice, and Support — all dynamically branded.
 - **Configurable branding**: `etc/config.json` externalises name, domain, taglines, social links, and owner data — white-label ready.
 - **GoatCounter analytics**: lightweight, privacy-respecting page-view tracking.
-- **Docker + Dokploy**: multi-stage production images and a `docker-compose.dokploy.yml` for one-command deployment.
+- **Containers + Dokploy**: multi-stage production images and a `compose.dokploy.yaml` for one-command deployment.
 - **CI/CD**: GitHub Actions workflow for lint, type-check, and test on every push.
 - **DDD vertical-slice backend**: Screaming Architecture with hexagonal ports — domain, application, and infrastructure strictly separated per slice (`certification/`, `contact/`).
 - **44 tests**: unit, integration, and acceptance coverage across domain, application, and HTTP layers.
@@ -36,8 +36,8 @@ src/
 etc/
   config.json   Central configuration (branding, SMTP, owner)
 infra/
-  docker-compose.yml          Local development
-  docker-compose.dokploy.yml  Production (CubePath)
+  compose.yaml          Local development
+  compose.dokploy.yaml  Production (CubePath)
 ```
 
 ---
