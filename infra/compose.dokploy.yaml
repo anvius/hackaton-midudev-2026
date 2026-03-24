@@ -2,7 +2,7 @@ services:
   doccum-backend:
     build:
       context: ..
-      dockerfile: infra/docker/Dockerfile.backend
+      dockerfile: infra/containers/Containerfile.backend
     environment:
       - PORT=3000
       - DB_PATH=/data/doccum.db
@@ -18,7 +18,7 @@ services:
   doccum-frontend:
     build:
       context: ..
-      dockerfile: infra/docker/Dockerfile.frontend
+      dockerfile: infra/containers/Containerfile.frontend
     environment:
       - HOST=0.0.0.0
       - PORT=4173
@@ -36,7 +36,7 @@ services:
   doccum-analytics:
     build:
       context: ..
-      dockerfile: infra/docker/Dockerfile.analytics
+      dockerfile: infra/containers/Containerfile.analytics
     environment:
       - GOATCOUNTER_VHOST=stats.doccum.com
       - GOATCOUNTER_EMAIL=${GOATCOUNTER_EMAIL:-admin@doccum.com}

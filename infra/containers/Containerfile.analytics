@@ -8,7 +8,7 @@ RUN gunzip /tmp/goatcounter.gz && \
     mv /tmp/goatcounter /usr/local/bin/goatcounter && \
     chmod +x /usr/local/bin/goatcounter
 
-COPY infra/docker/goatcounter-entrypoint.sh /entrypoint.sh
+COPY infra/containers/goatcounter-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 VOLUME /data

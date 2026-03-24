@@ -26,6 +26,6 @@
 
 ## Deployment
 
-- Docker files under `infra/docker/`
-- Compose orchestration in `infra/docker-compose.yml`
+- Container files under `infra/containers/`
+- Compose orchestration in `infra/compose.yaml`
 - Makefile as command entry point
