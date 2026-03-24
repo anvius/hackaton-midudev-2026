@@ -1,3 +1,13 @@
+# Dokploy deployment: create a "Docker Compose" project, point it to
+# the Git repo and set Compose Path to "infra/compose.dokploy.yaml".
+# Dokploy clones the repo and runs `docker compose build` on the server
+# — no registry needed, images are built from source.
+#
+# Required env vars in Dokploy project settings:
+#   GOATCOUNTER_EMAIL, GOATCOUNTER_PASSWORD
+#
+# Replace doccum.com / api.doccum.com / stats.doccum.com with your domain.
+
 services:
   doccum-backend:
     build:
@@ -19,11 +29,12 @@ services:
     build:
       context: ..
       dockerfile: infra/containers/Containerfile.frontend
+      args:
+        VITE_API_BASE_URL: https://api.doccum.com
     environment:
       - HOST=0.0.0.0
       - PORT=4173
       - ORIGIN=https://doccum.com
-      - VITE_API_BASE_URL=https://api.doccum.com
     depends_on:
       - doccum-backend
     labels:
