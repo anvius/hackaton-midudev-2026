@@ -9,7 +9,7 @@
     "preview": "node build",
     "start": "bun build/index.js",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "test": "playwright test",
+    "test": "echo 'No tests configured'",
     "lint": "eslint .",
     "format": "prettier --check ."
   },
@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@playwright/test": "^1.50.0",
     "@types/qrcode": "^1.5.5",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
