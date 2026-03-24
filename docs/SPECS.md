@@ -27,6 +27,9 @@ Provide a simple and trustworthy way to certify digital content existence withou
 - Hash algorithm is SHA256 only.
 - SQLite for MVP persistence.
 - Public read access through unique URL.
+- File names are not stored in persisted certificates.
+- Certificate records are chained with previous digest linkage.
+- External time evidence hashes may be stored from CubePath public pages.
 
 ## Implementation Status
 
@@ -40,3 +43,5 @@ Provide a simple and trustworthy way to certify digital content existence withou
 	- Infrastructure adapters: SQLite repository, Node crypto hash provider, HTTP controllers.
 	- Acceptance API flow: certify text and fetch certificate by id.
 	- Frontend UX flow: drag/drop or text input, certificate route, QR and copy actions.
+	- Bilingual UI (ES/EN) and theme mode (`system`, `light`, `dark`).
+	- Dedicated process and legal pages with privacy and compliance explanations.
