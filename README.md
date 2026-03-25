@@ -1,58 +1,56 @@
-# DOCCUM
+# Attestly
 
-> Certifica la existencia de archivos y textos con SHA-256 y marca de tiempo de confianza.
+> Certify the existence of files and text with SHA-256 and a trusted timestamp.
 
-[![CI](https://github.com/midudev/hackaton-cubepath-2026/actions/workflows/ci.yml/badge.svg)](https://github.com/midudev/hackaton-cubepath-2026/actions/workflows/ci.yml)
+[![CI](https://github.com/anvius/attestly/actions/workflows/ci.yml/badge.svg)](https://github.com/anvius/attestly/actions/workflows/ci.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-0.1.0-green)](package.json)
+[![Version](https://img.shields.io/badge/version-1.3.2-green)](package.json)
 [![Runtime: Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun)](https://bun.sh)
 [![Frontend: SvelteKit](https://img.shields.io/badge/frontend-SvelteKit-ff3e00?logo=svelte)](https://kit.svelte.dev)
 
-DOCCUM permite a cualquier persona generar un **certificado criptográfico de existencia** para un documento o fragmento de texto. El contenido no se almacena: solo su huella SHA-256, una marca de tiempo UTC del servidor y el digest acumulativo de la cadena de certificados anterior.
+**Attestly** lets anyone generate a **cryptographic proof-of-existence certificate** for a document or text snippet. The original content is never stored — only its SHA-256 fingerprint, a server UTC timestamp, and the cumulative chain digest linking it to every previous certificate.
+
+Live at [doccum.com](https://doccum.com).
+
+> **Hackathon project** — Built for the [CubePath 2026 Hackathon](https://github.com/midudev/hackaton-cubepath-2026) by [@anvius](https://anvius.com).
 
 ---
 
 ## Stack
 
-| Capa | Tecnología |
-|------|-----------|
+| Layer | Technology |
+|-------|------------|
 | Frontend | SvelteKit 2 + Svelte 5 + Tailwind CSS 3 |
 | Backend | Bun + Hono |
-| Base de datos | SQLite (`bun:sqlite`) |
-| Contenedores | Docker Compose + multi-stage builds |
-| Analytics | GoatCounter (cookieless, GDPR) |
+| Database | SQLite (`bun:sqlite`) |
+| Containers | Docker Compose + multi-stage builds |
+| Analytics | GoatCounter (cookieless, GDPR-friendly) |
 
 ---
 
-## Inicio rápido
+## Quick Start
 
 ```bash
-# 1. Instalar dependencias
-bun --cwd src/backend install
-bun --cwd src/frontend install
+# 1. Install dependencies
+bun install --cwd src/backend
+bun install --cwd src/frontend
 
-# 2. Configurar entorno (opcional para dev básico)
+# 2. Configure environment (optional for basic dev)
 cp .env.example .env
 
-# 3. Arrancar servidores en parallel
+# 3. Start servers in parallel
 make dev
 ```
 
-Abre [http://localhost:5173](http://localhost:5173).
+Open [http://localhost:5173](http://localhost:5173).
 
-### Todos los tests
+### Run all tests
 
 ```bash
 make test-all
 ```
 
-### Validar arquitectura
-
-```bash
-make validate-architecture
-```
-
-### Stack completo en Docker
+### Full stack in Docker
 
 ```bash
 make start-infra
@@ -60,83 +58,83 @@ make start-infra
 
 ---
 
-## Flujo del producto
+## Product Flow
 
-1. El usuario arrastra un archivo o pega texto en `/`.
-2. El frontend llama a `POST /api/certify`.
-3. El backend calcula SHA-256, captura timestamp UTC y enlaza el certificado a la cadena anterior (seeded chain digest).
-4. El frontend redirige a `/cert/:id`.
-5. La página pública del certificado muestra hash, timestamp, digest de cadena, digest previo y QR con la URL.
-
----
-
-## Privacidad
-
-- El contenido original **no se almacena**.
-- No se almacenan nombres de archivo.
-- Solo se persiste metadata mínima y evidencia criptográfica.
-- Sin cookies de terceros. Sin tracking invasivo.
+1. The user drags a file or pastes text on `/`.
+2. The frontend calls `POST /api/certify`.
+3. The backend computes SHA-256, captures a UTC timestamp, and chains the certificate to the previous one (seeded chain digest).
+4. The frontend redirects to `/cert/:id`.
+5. The public certificate page shows hash, timestamp, chain digest, previous digest, and a QR code linking to the URL.
 
 ---
 
-## Arquitectura
+## Privacy
 
-DDD con vertical slicing. Cada feature es una columna autónoma:
+- The original content is **never stored**.
+- File names are not persisted.
+- Only minimal metadata and cryptographic evidence are kept.
+- No third-party cookies. No invasive tracking.
+
+---
+
+## Architecture
+
+DDD with vertical slicing. Each feature is a self-contained column:
 
 ```
 src/backend/
-├── certification/        ← feature: certificación
-│   ├── domain/           ← lógica de negocio pura
-│   ├── application/      ← casos de uso
-│   └── infrastructure/   ← adaptadores HTTP, SQLite, crypto
-├── contact/              ← feature: formulario de contacto
+├── certification/        ← feature: certification
+│   ├── domain/           ← pure business logic
+│   ├── application/      ← use cases
+│   └── infrastructure/   ← HTTP, SQLite, crypto adapters
+├── contact/              ← feature: contact form
 │   ├── application/
 │   └── infrastructure/
-└── shared/               ← config, servidor, DB connection
+└── shared/               ← config, server, DB connection
 ```
 
-Dirección de dependencias: `Infrastructure → Application → Domain`
+Dependency direction: `Infrastructure → Application → Domain`
 
-### Matriz de tests
+### Test Matrix
 
-| Nivel | Qué cubre | Herramienta |
-|-------|-----------|-------------|
+| Level | Covers | Tool |
+|-------|--------|------|
 | Unit | Domain + use cases | `bun:test` |
 | Integration | Providers, repos, controllers | `bun:test` |
-| Acceptance | API end-to-end en proceso | `bun:test` |
-| E2E | Flujo en navegador | Playwright |
+| Acceptance | In-process API end-to-end | `bun:test` |
 
 ---
 
-## Experiencia frontend
+## Frontend Experience
 
-- Interfaz bilingüe (Español / English).
-- Selector de tema (`system` / `light` / `dark`).
-- Página explicativa del proceso: `/process`.
-- FAQ y ayuda: `/help`.
-- Páginas legales: `/legal`, `/privacy`, `/terms`.
-
----
-
-## Variables de entorno
-
-Consulta [`.env.example`](.env.example) para la lista completa con descripción.
+- Bilingual interface (Spanish / English).
+- Theme selector (`system` / `light` / `dark`).
+- Step-by-step process page: `/process`.
+- FAQ and help: `/help`.
+- Legal pages: `/legal`, `/privacy`, `/terms`.
+- Social sharing from certificate pages (X, LinkedIn, Web Share API).
 
 ---
 
-## Contribuir
+## Environment Variables
 
-Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para setup local, convención de commits y reglas de arquitectura.
-
----
-
-## Nota legal
-
-Las páginas legales alinean el MVP con RGPD/LOPDGDD/LSSI para transparencia y privacidad por diseño, pero no constituyen asesoramiento jurídico. Obtén revisión legal antes de despliegue en producción.
+See [`.env.example`](.env.example) for the full list with descriptions.
 
 ---
 
-## Licencia
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup, commit conventions, and architecture rules.
+
+---
+
+## Legal Notice
+
+The legal pages align the MVP with GDPR / LOPDGDD / LSSI for transparency and privacy by design, but they do not constitute legal advice. Obtain professional legal review before any production deployment.
+
+---
+
+## License
 
 [GPL-3.0-or-later](LICENSE)
 

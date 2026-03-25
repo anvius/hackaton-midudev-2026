@@ -61,7 +61,7 @@ const DEFAULT_CONFIG: AppConfig = {
     authorUrl: "https://anvius.com",
     madeInLabel: "Mojácar",
     links: {
-      github: "https://github.com/anvius/hackaton-midudev-2026",
+      github: "https://github.com/anvius/attestly",
       codeberg: "https://codeberg.org/anvius",
       mastodon: "https://fosstodon.org/@anvius"
     }

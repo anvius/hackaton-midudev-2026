@@ -1,4 +1,4 @@
-# Contributing to DOCCUM
+# Contributing to Attestly
 
 Thank you for your interest in contributing. This project follows
 [Conventional Commits](https://www.conventionalcommits.org/) and

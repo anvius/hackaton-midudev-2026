@@ -1,5 +1,5 @@
 {
-  "name": "@doccum/backend",
+  "name": "@attestly/backend",
   "version": "1.3.2",
   "private": true,
   "type": "module",

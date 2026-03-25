@@ -220,7 +220,7 @@
           </button>
 
           <!-- GitHub -->
-          <a href={$identityData?.links?.github ?? "https://github.com/anvius/hackaton-midudev-2026"} rel="noreferrer" target="_blank" title="GitHub">
+          <a href={$identityData?.links?.github ?? "https://github.com/anvius/attestly"} rel="noreferrer" target="_blank" title="GitHub">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.33.72-4.03-1.42-4.03-1.42-.55-1.4-1.33-1.78-1.33-1.78-1.08-.74.08-.72.08-.72 1.2.08 1.82 1.23 1.82 1.23 1.06 1.82 2.78 1.3 3.46 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.53.12-3.2 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.66 1.67.25 2.9.13 3.2.76.84 1.22 1.91 1.22 3.22 0 4.6-2.81 5.62-5.49 5.91.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.83.58A12 12 0 0 0 12 .5z" />
             </svg>
