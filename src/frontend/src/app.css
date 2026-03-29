@@ -166,7 +166,7 @@ p {
   margin: 0 auto;
   padding: 14px 20px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 24px;
   align-items: center;
 }
@@ -190,21 +190,8 @@ p {
   color: #49d30f;
 }
 
-.main-nav {
-  display: inline-flex;
-  gap: 20px;
-  justify-self: center;
-}
-
-.main-nav a {
-  font-size: 15px;
-  color: var(--muted);
-  padding: 6px 0;
-}
-
-.main-nav a.active,
-.main-nav a:hover {
-  color: var(--text);
+.header-verify {
+  font-size: 14px;
 }
 
 .actions {

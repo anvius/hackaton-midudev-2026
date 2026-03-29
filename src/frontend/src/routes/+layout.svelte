@@ -131,11 +131,8 @@
         <span>{$brandingData?.name ?? "DOCCUM"}</span>
       </a>
 
-      <div class="main-nav">
-        <a href="/verify">{t.navVerify}</a>
-      </div>
-
       <div class="actions" style="justify-self: end;">
+        <a class="btn btn-outline header-verify" href="/verify">{t.navVerify}</a>
         <div class="lang-wrap">
           <button class="lang-button" type="button" aria-haspopup="menu" aria-expanded={languageMenuOpen} on:click={toggleLanguageMenu}>
             <span>{languageFlags[$language]}</span>
