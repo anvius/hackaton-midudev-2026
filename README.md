@@ -77,6 +77,12 @@ make start-infra
 
 ---
 
+## API
+
+See [docs/API.md](docs/API.md) for the full public API reference with cURL examples.
+
+---
+
 ## Architecture
 
 DDD with vertical slicing. Each feature is a self-contained column:
