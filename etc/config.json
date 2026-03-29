@@ -21,13 +21,13 @@
   "contact": {
     "defaultSubject": "Contacto desde DOCCUM",
     "smtp": {
-      "host": "smtp.your-provider.example",
+      "host": "smtp.lexemas.com",
       "port": 587,
       "secure": false,
-      "username": "no-reply@your-domain.example",
-      "password": "SET_SMTP_PASSWORD_HERE",
-      "fromEmail": "no-reply@your-domain.example",
-      "toEmail": "inbox@your-domain.example"
+      "username": "doccum@lexemas.com",
+      "password": "SET_VIA_SMTP_PASSWORD_ENV_VAR",
+      "fromEmail": "doccum@lexemas.com",
+      "toEmail": "doccum@lexemas.com"
     },
     "captcha": {
       "firstOperand": 7,
