@@ -4,12 +4,19 @@ import type {
   ExternalTimeEvidenceProvider
 } from "../../application/interfaces/external-time-evidence-provider";
 
-const CUBEPATH_UNIXTIME_URL = "https://cubepath.com/unixtime-converter";
-const CUBEPATH_STATUS_URL = "https://cubepath.com/status";
+// cubepath.com is behind a Cloudflare JS-challenge that blocks server-side fetches (403).
+// We use timeapi.io as the trusted external time reference: it is a public, stable API
+// that returns verifiable UTC timestamps. The SHA-256 hash of its response proves
+// the certification was created at a specific point in time.
+const TIMEAPI_CURRENT_URL = "https://timeapi.io/api/time/current/zone?timeZone=UTC";
+const TIMEAPI_TIMEZONE_URL = "https://timeapi.io/api/timezone/zone?timeZone=UTC";
 
 async function fetchAndHash(url: string): Promise<{ checkedAt: Date; sourceHash: string } | null> {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(8000)
+    });
 
     if (!response.ok) {
       return null;
@@ -30,8 +37,8 @@ async function fetchAndHash(url: string): Promise<{ checkedAt: Date; sourceHash:
 export class CubepathTimeEvidenceProvider implements ExternalTimeEvidenceProvider {
   async collectEvidence(): Promise<ExternalTimeEvidence> {
     const [unixtime, status] = await Promise.all([
-      fetchAndHash(CUBEPATH_UNIXTIME_URL),
-      fetchAndHash(CUBEPATH_STATUS_URL)
+      fetchAndHash(TIMEAPI_CURRENT_URL),
+      fetchAndHash(TIMEAPI_TIMEZONE_URL)
     ]);
 
     return {
